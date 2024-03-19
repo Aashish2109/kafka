@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: secret-pod-env
+spec:
+  containers:
+  - name: secret-container-env
+    image: busybox
+    command: ["sh", "-c", "echo $SECRET_KEY && sleep 3600"]
+    env:
+    - name: SECRET_KEY
+      valueFrom:
+        secretKeyRef:
+          name: mysecret
+          key: secret-key
